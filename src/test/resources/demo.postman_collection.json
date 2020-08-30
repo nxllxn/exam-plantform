@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "a9e882f4-6c3f-46b1-ae12-7f0202ca57c4",
+		"name": "demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Blank Quiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/blank-quizzes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-quizzes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A New Blank Quiz",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\":\"题目描述\",\n\t\"referenceAnswer\":\"参考答案\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/blank-quizzes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-quizzes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update A Blank Quiz",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\":\"题目描述 modified\",\n\t\"referenceAnswer\":\"参考答案 modified\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/blank-quizzes/b0409d9c-8a77-49c8-a596-879212e2ed19",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-quizzes",
+						"b0409d9c-8a77-49c8-a596-879212e2ed19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete A Blank Quiz",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "localhost:8080/blank-quizzes/88126b3b-144e-4c00-893b-dfd000bcb6e5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-quizzes",
+						"88126b3b-144e-4c00-893b-dfd000bcb6e5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
