@@ -7,6 +7,7 @@ import exam.paperContext.domain.model.blankquiz.BlankQuiz;
 import exam.paperContext.domain.model.blankquiz.BlankQuizId;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +31,7 @@ public class BlankQuizController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    BlankQuizDTO create(@RequestBody CreateBlankQuizCommand command) {
+    BlankQuizDTO create(@Valid @RequestBody CreateBlankQuizCommand command) {
         BlankQuiz blankQuiz = applicationService.create(command.getDescription(), command.getReferenceAnswer());
 
         return BlankQuizDTO.from(blankQuiz);
@@ -38,7 +39,7 @@ public class BlankQuizController {
 
     @PutMapping("/{blankQuizIdStr}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void update(@PathVariable String blankQuizIdStr, @RequestBody UpdateBlankQuizCommand command) {
+    void update(@PathVariable String blankQuizIdStr,@Valid @RequestBody UpdateBlankQuizCommand command) {
         BlankQuizId blankQuizId = BlankQuizId.builder().id(blankQuizIdStr).build();
 
         applicationService.update(blankQuizId, command.getDescription(), command.getReferenceAnswer());

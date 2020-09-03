@@ -30,9 +30,10 @@ public class BlankQuiz extends AbstractEntity<BlankQuiz> {
         return this.blankQuizId.equals(other.blankQuizId);
     }
 
-    public static BlankQuiz create(String description, String referenceAnswer, LocalDateTime createdTime) {
+    public static BlankQuiz create(BlankQuizId blankQuizId, String description, String referenceAnswer,
+        LocalDateTime createdTime) {
         return BlankQuiz.builder()
-            .blankQuizId(BlankQuizId.nextId())
+            .blankQuizId(blankQuizId)
             .description(description)
             .referenceAnswer(referenceAnswer)
             .createdTime(createdTime)

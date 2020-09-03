@@ -4,7 +4,7 @@ import exam.paperContext.domain.model.blankquiz.BlankQuiz;
 import exam.paperContext.domain.model.blankquiz.BlankQuizId;
 import exam.paperContext.domain.model.blankquiz.BlankQuizRepository;
 import exam.paperContext.domain.model.paper.ResourceNotFoundException;
-import java.time.LocalDateTime;
+import exam.paperContext.infrastructure.Clock;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class BlankQuizApplicationService {
-
+    private final Clock clock;
     private final BlankQuizRepository blankQuizRepository;
 
     public BlankQuiz find(BlankQuizId blankQuizId) {
@@ -27,7 +27,9 @@ public class BlankQuizApplicationService {
     }
 
     public BlankQuiz create(String description, String referenceAnswer) {
-        BlankQuiz blankQuiz = BlankQuiz.create(description, referenceAnswer, LocalDateTime.now());
+        BlankQuizId blankQuizId = blankQuizRepository.nextId();
+
+        BlankQuiz blankQuiz = BlankQuiz.create(blankQuizId,description, referenceAnswer, clock.now());
 
         blankQuizRepository.save(blankQuiz);
 
@@ -43,7 +45,7 @@ public class BlankQuizApplicationService {
 
         BlankQuiz blankQuizPersisted = blankQuizOpt.get();
 
-        blankQuizPersisted.update(description, referenceAnswer, LocalDateTime.now());
+        blankQuizPersisted.update(description, referenceAnswer, clock.now());
 
         blankQuizRepository.save(blankQuizPersisted);
     }
@@ -61,7 +63,7 @@ public class BlankQuizApplicationService {
 
         BlankQuiz blankQuizPersisted = blankQuizOpt.get();
 
-        blankQuizPersisted.delete(LocalDateTime.now());
+        blankQuizPersisted.delete(clock.now());
 
         blankQuizRepository.save(blankQuizPersisted);
     }

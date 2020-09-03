@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 public class BlankQuizRepositoryImpl extends InMemoryRepository<BlankQuizId, BlankQuiz> implements BlankQuizRepository {
 
     @Override
+    public BlankQuizId nextId() {
+        return BlankQuizId.nextId();
+    }
+
+    @Override
     public Optional<BlankQuiz> find(BlankQuizId blankQuizId) {
         return findById(blankQuizId).filter(BlankQuiz::isValid);
     }
